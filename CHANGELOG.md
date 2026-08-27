@@ -149,7 +149,7 @@ and each would have silently degraded every output:
   plain Lanczos, due to a decaying step size combined with a correction blur.
 - `--backends` required an image argument despite being informational.
 
-[Unreleased]: https://github.com/OWNER/photolift/compare/v0.2.1...HEAD
-[0.2.1]: https://github.com/OWNER/photolift/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/OWNER/photolift/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/OWNER/photolift/releases/tag/v0.1.0
+[Unreleased]: https://github.com/dasdeepbendu12-dev/photolift/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/dasdeepbendu12-dev/photolift/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/dasdeepbendu12-dev/photolift/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/dasdeepbendu12-dev/photolift/releases/tag/v0.1.0

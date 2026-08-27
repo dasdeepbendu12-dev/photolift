@@ -1,14 +1,14 @@
 # photolift
 
 [![CI](https://github.com/dasdeepbendu12-dev/photolift/actions/workflows/ci.yml/badge.svg)](https://github.com/dasdeepbendu12-dev/photolift/actions/workflows/ci.yml)
-[![PyPI](https://img.shields.io/pypi/v/photolift.svg)](https://pypi.org/project/photolift/)
-[![Python](https://img.shields.io/pypi/pyversions/photolift.svg)](https://pypi.org/project/photolift/)
+[![Status](https://img.shields.io/badge/status-pre--release-orange.svg)](https://github.com/dasdeepbendu12-dev/photolift/releases)
+[![Python](https://img.shields.io/badge/python-3.9%20%E2%80%93%203.13-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 Turn a small, soft, badly-lit photo into a large, clean one.
 
 ```bash
-pip install photolift
+pip install git+https://github.com/dasdeepbendu12-dev/photolift
 photolift dim_phone_photo.jpg -o fixed.png --scale 4
 ```
 
@@ -66,12 +66,26 @@ claims otherwise is either using a learned model and not telling you, or lying.
 
 ## Install
 
+Not on PyPI yet, so install from source:
+
 ```bash
-pip install photolift                # classical backends, no GPU, no downloads
-pip install "photolift[ai]"          # adds the Real-ESRGAN backend (torch)
+# classical backends, no GPU, no model downloads
+pip install git+https://github.com/dasdeepbendu12-dev/photolift
+
+# adds the optional Real-ESRGAN backend (pulls in torch, ~2GB)
+pip install "photolift[ai] @ git+https://github.com/dasdeepbendu12-dev/photolift"
 ```
 
-Requires Python 3.9+. The core dependency is `opencv-contrib-python`.
+Requires Python 3.9-3.13. The core dependency is `opencv-contrib-python`,
+which works on both 4.x and 5.x.
+
+On Linux, OpenCV links against GL and glib even when used headlessly. If the
+import fails with `libGL.so.1: cannot open shared object file`, install the
+system packages rather than reinstalling OpenCV:
+
+```bash
+sudo apt-get install -y libgl1 libglib2.0-0
+```
 
 ---
 
