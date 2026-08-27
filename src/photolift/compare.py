@@ -74,8 +74,18 @@ def _fit_height(img: np.ndarray, h: int) -> np.ndarray:
 
 
 def _stack_labels(canvas: np.ndarray, labels: list[tuple[str, int]]) -> np.ndarray:
-    bar = np.full((_LABEL_H, canvas.shape[1], 3), 0.08, np.float32)
+    """Render the caption bar and stack it above the canvas.
+
+    The text is drawn on an 8-bit buffer and converted afterwards, rather than
+    straight onto the float canvas everything else here uses. That is not a
+    style choice: OpenCV 5 asserts ``img.depth() == CV_8U`` inside ``putText``,
+    where 4.x quietly accepted a float image. Drawing on float therefore works
+    on a pinned old install and fails on every machine that resolves a current
+    OpenCV -- which is the worst possible failure mode, since it passes locally
+    and breaks for everyone else.
+    """
+    bar = np.full((_LABEL_H, canvas.shape[1], 3), 20, np.uint8)      # ~0.08
     for text, x in labels:
         cv2.putText(bar, text, (x + 10, 23), cv2.FONT_HERSHEY_SIMPLEX, 0.6,
-                    (0.95, 0.95, 0.95), 1, cv2.LINE_AA)
-    return np.concatenate([bar, canvas], axis=0)
+                    (242, 242, 242), 1, cv2.LINE_AA)                 # ~0.95
+    return np.concatenate([bar.astype(np.float32) / 255.0, canvas], axis=0)

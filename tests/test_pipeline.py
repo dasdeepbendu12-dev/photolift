@@ -146,3 +146,23 @@ def test_comparison_helpers(degraded):
     assert pl.side_by_side(degraded, after).shape[2] == 3
     assert pl.split_view(degraded, after).shape[:2] == after.shape[:2]
     assert pl.zoom_strip(degraded, after).ndim == 3
+
+
+@pytest.mark.parametrize("labelled", [True, False])
+def test_comparison_output_is_float_rgb_in_range(degraded, labelled):
+    """Guards the caption bar against OpenCV's drawing-API depth rules.
+
+    ``cv2.putText`` requires an 8-bit image in OpenCV 5; 4.x accepted a float
+    one. Drawing on the float canvas therefore passed against a pinned old
+    install and raised on every machine with a current OpenCV -- which is the
+    failure mode that gets shipped, because it is invisible to the author.
+    Asserting the contract of the returned array catches any recurrence.
+    """
+    after = pl.enhance(degraded, scale=2).image
+    sheet = pl.side_by_side(degraded, after, label=labelled)
+
+    assert sheet.dtype == np.float32
+    assert sheet.ndim == 3 and sheet.shape[2] == 3
+    assert sheet.min() >= -1e-6 and sheet.max() <= 1.0 + 1e-6
+    # The label bar adds rows above the images; without it, nothing is added.
+    assert (sheet.shape[0] > after.shape[0]) == labelled

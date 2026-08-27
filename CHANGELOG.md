@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 Nothing yet.
 
+## [0.2.1] — 2026-08-25
+
+### Fixed
+
+- **Comparison sheets crashed on OpenCV 5.** ``cv2.putText`` asserts
+  ``img.depth() == CV_8U`` in OpenCV 5, where 4.x quietly accepted a float
+  image, so ``side_by_side`` and ``zoom_strip`` raised
+  ``(-215:Assertion failed) img.depth() == CV_8U`` on any install that
+  resolved a current OpenCV. The caption bar is now drawn on an 8-bit buffer
+  and converted afterwards, which works on both 4.x and 5.x.
+
+  This is the failure mode worth naming: it passed against a pinned older
+  OpenCV and broke for everyone else, so it was invisible locally and hit all
+  six CI jobs identically. A test now asserts the dtype and range contract of
+  the returned sheet rather than only its shape.
+
+- Python 3.13 restored to the CI matrix. It had been removed on the assumption
+  that OpenCV lacked 3.13 wheels; opencv-contrib-python ships an ``abi3``
+  wheel that covers it, and 3.13 was never the cause of the failure.
+
 ## [0.2.0] — 2026-08-25
 
 The naturalness release. Version 0.1 over-processed: on an image that needed
@@ -129,6 +149,7 @@ and each would have silently degraded every output:
   plain Lanczos, due to a decaying step size combined with a correction blur.
 - `--backends` required an image argument despite being informational.
 
-[Unreleased]: https://github.com/dasdeepbendu12-dev/photolift/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/dasdeepbendu12-dev/photolift/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/dasdeepbendu12-dev/photolift/releases/tag/v0.1.0
+[Unreleased]: https://github.com/OWNER/photolift/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/OWNER/photolift/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/OWNER/photolift/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/OWNER/photolift/releases/tag/v0.1.0

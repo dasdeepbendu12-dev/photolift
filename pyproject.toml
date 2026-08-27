@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "photolift"
-version = "0.2.0"
+version = "0.2.1"
 description = "Upscale and enhance photographs: resolution, contrast, focus, lighting and colour."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -44,10 +44,10 @@ dev = [
 photolift = "photolift.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/dasdeepbendu12-dev/photolift"
-Repository = "https://github.com/dasdeepbendu12-dev/photolift"
-Issues = "https://github.com/dasdeepbendu12-dev/photolift/issues"
-Changelog = "https://github.com/dasdeepbendu12-dev/photolift/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/OWNER/photolift"
+Repository = "https://github.com/OWNER/photolift"
+Issues = "https://github.com/OWNER/photolift/issues"
+Changelog = "https://github.com/OWNER/photolift/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 where = ["src"]
