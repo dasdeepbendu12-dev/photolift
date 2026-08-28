@@ -1,7 +1,7 @@
 # photolift
 
 [![CI](https://github.com/dasdeepbendu12-dev/photolift/actions/workflows/ci.yml/badge.svg)](https://github.com/dasdeepbendu12-dev/photolift/actions/workflows/ci.yml)
-[![Status](https://img.shields.io/badge/status-pre--release-orange.svg)](https://github.com/dasdeepbendu12-dev/photolift/releases)
+[![Release](https://img.shields.io/github/v/tag/dasdeepbendu12-dev/photolift?label=release&color=blue)](https://github.com/dasdeepbendu12-dev/photolift/releases)
 [![Python](https://img.shields.io/badge/python-3.9%20%E2%80%93%203.13-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
